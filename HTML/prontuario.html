@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prontuário | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+
+    <!-- =====================================================
+         ESTILO DO BOTÃO SAIR
+         ===================================================== -->
+
+    <style>
+
+        .topbar-logout {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border: 1px solid #d9e3df;
+            background: #ffffff;
+
+            color: #dc3545;
+
+            border-radius: 9px;
+
+            padding: 9px 14px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+
+            white-space: nowrap;
+        }
+
+
+        .topbar-logout img {
+            width: 18px;
+            height: 18px;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+
+        .topbar-logout:hover {
+            background: #fff5f5;
+
+            border-color: #f1b8be;
+
+            transform: translateY(-1px);
+        }
+
+
+        .topbar-logout:active {
+            transform: translateY(0);
+        }
+
+
+        @media (max-width: 750px) {
+
+            .topbar-logout {
+                padding: 9px 11px;
+                gap: 0;
+            }
+
+
+            .topbar-logout span {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <img
+                src="../IMG/logo-gbsmedconnect.png"
+                alt="GBSMedConnect - Gestão Médica"
+                class="logo-image"
+            >
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU PRINCIPAL
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="agenda.html" class="menu-item">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Agenda</span>
+
+            </a>
+
+
+            <a href="pacientes.html" class="menu-item">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Pacientes</span>
+
+            </a>
+
+
+            <a href="prontuario.html" class="menu-item active">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Prontuários</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title menu-secondary">
+            OUTROS
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="perfil.html" class="menu-item">
+
+                <span class="menu-icon">◉</span>
+
+                <span>Meu perfil</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="doctor-mini">
+
+                <div
+                    class="doctor-avatar"
+                    id="recordDoctorAvatar"
+                >
+                    --
+                </div>
+
+                <div>
+
+                    <strong id="recordDoctorName">
+                        Carregando...
+                    </strong>
+
+                    <small>Médico</small>
+
+                </div>
+
+                <span class="doctor-arrow">
+                    ›
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Pesquisar pacientes, consultas..."
+                >
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification"
+                    type="button"
+                    aria-label="Notificações"
+                >
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="doctor-avatar small"
+                        id="recordDoctorAvatarTop"
+                    >
+                        --
+                    </div>
+
+                    <div>
+
+                        <strong id="recordDoctorNameTop">
+                            Carregando...
+                        </strong>
+
+                        <small>Administrador</small>
+
+                    </div>
+
+                    <span>⌄</span>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÃO SAIR
+                     ================================================= -->
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="topbar-logout"
+                    title="Sair da conta"
+                    aria-label="Sair da conta"
+                >
+
+                    <img
+                        src="../IMG/sair.png"
+                        alt="Sair"
+                    >
+
+                    <span>Sair</span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- PRONTUÁRIO -->
+
+        <section class="dashboard medical-record-page">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="page-heading">
+
+                <div>
+
+                    <h1>Prontuário eletrônico</h1>
+
+                    <p>
+                        Consulte e registre informações dos atendimentos.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    id="newRecordButton"
+                    type="button"
+                >
+                    + Novo atendimento
+                </button>
+
+            </div>
+
+
+            <!-- BUSCA DO PACIENTE -->
+
+            <section class="dashboard-card record-search-card">
+
+                <div class="record-search-content">
+
+                    <div>
+
+                        <h2>Selecionar paciente</h2>
+
+                        <p>
+                            Pesquise um paciente para consultar seu prontuário.
+                        </p>
+
+                    </div>
+
+
+                    <div class="record-search">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="recordPatientSearch"
+                            placeholder="Digite o nome do paciente..."
+                        >
+
+                        <button
+                            id="searchRecordButton"
+                            type="button"
+                        >
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DADOS DO PACIENTE -->
+
+            <section class="dashboard-card patient-record-header">
+
+                <div class="record-patient-info">
+
+                    <div
+                        class="record-patient-avatar"
+                        id="recordPatientAvatar"
+                    >
+                        PA
+                    </div>
+
+
+                    <div>
+
+                        <h2 id="recordPatientName">
+                            Nenhum paciente selecionado
+                        </h2>
+
+                        <p id="recordPatientSince">
+                            Selecione um paciente para visualizar o prontuário.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="record-patient-details">
+
+                    <div>
+
+                        <span>CPF</span>
+
+                        <strong id="recordPatientCpf">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Data de nascimento</span>
+
+                        <strong id="recordPatientBirthDate">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Telefone</span>
+
+                        <strong id="recordPatientPhone">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTEÚDO -->
+
+            <div class="record-grid">
+
+
+                <!-- FORMULÁRIO -->
+
+                <section class="dashboard-card record-form-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Atendimento
+                            </h2>
+
+                            <p>
+                                Registre as informações da consulta.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="record-form">
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="recordDate">
+                                    Data do atendimento
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="recordDate"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="recordTime">
+                                    Horário
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="recordTime"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="recordComplaint">
+                                Queixa principal
+                            </label>
+
+                            <textarea
+                                id="recordComplaint"
+                                placeholder="Descreva a queixa principal do paciente..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="recordObservations">
+                                Observações clínicas
+                            </label>
+
+                            <textarea
+                                class="large-textarea"
+                                id="recordObservations"
+                                placeholder="Registre as observações do atendimento..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="recordPrescription">
+                                Prescrição
+                            </label>
+
+                            <textarea
+                                id="recordPrescription"
+                                placeholder="Registre a prescrição ou orientações fornecidas..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                class="secondary-button"
+                                id="clearRecordButton"
+                                type="button"
+                            >
+                                Limpar
+                            </button>
+
+
+                            <button
+                                class="primary-button"
+                                id="saveRecordButton"
+                                type="button"
+                            >
+                                Salvar atendimento
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- HISTÓRICO -->
+
+                <section class="dashboard-card record-history-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Histórico
+                            </h2>
+
+                            <p>
+                                Atendimentos anteriores.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="record-history"
+                        id="recordHistory"
+                    >
+
+                        <div class="empty-state">
+
+                            <p>
+                                Selecione um paciente para visualizar o histórico.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="dashboard-footer">
+
+                <span>
+                    GBSMedConnect © 2026
+                </span>
+
+                <span>
+                    Sistema de gerenciamento médico
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL DE DETALHES DO ATENDIMENTO
+     ===================================================== -->
+
+<div
+    class="record-details-overlay"
+    id="recordDetailsModal"
+>
+
+    <div class="record-details-modal">
+
+
+        <!-- CABEÇALHO DO MODAL -->
+
+        <div class="record-details-header">
+
+            <div>
+
+                <h2>
+                    Detalhes do atendimento
+                </h2>
+
+                <p id="detailsPatientName">
+                    -
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="record-details-close"
+                id="closeRecordDetailsButton"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- CONTEÚDO DO MODAL -->
+
+        <div class="record-details-body">
+
+
+            <!-- INFORMAÇÕES BÁSICAS -->
+
+            <div class="record-details-info">
+
+
+                <div class="record-detail-item">
+
+                    <span>
+                        Data
+                    </span>
+
+                    <strong id="detailsDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="record-detail-item">
+
+                    <span>
+                        Horário
+                    </span>
+
+                    <strong id="detailsTime">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="record-detail-item">
+
+                    <span>
+                        Médico responsável
+                    </span>
+
+                    <strong id="detailsDoctor">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- QUEIXA -->
+
+            <div class="record-detail-section">
+
+                <span>
+                    Queixa principal
+                </span>
+
+                <p id="detailsComplaint">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- OBSERVAÇÕES -->
+
+            <div class="record-detail-section">
+
+                <span>
+                    Observações clínicas
+                </span>
+
+                <p id="detailsObservations">
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- PRESCRIÇÃO -->
+
+            <div class="record-detail-section">
+
+                <span>
+                    Prescrição
+                </span>
+
+                <p id="detailsPrescription">
+                    -
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RODAPÉ -->
+
+        <div class="record-details-footer">
+
+            <button
+                type="button"
+                class="secondary-button"
+                id="closeRecordDetailsButtonFooter"
+            >
+                Fechar
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script
+    type="module"
+    src="../JS/app.js"
+></script>
+
+<script
+    type="module"
+    src="../JS/prontuario.js"
+></script>
+
+
+<!-- =====================================================
+     NOME DO MÉDICO LOGADO
+     ===================================================== -->
+
+<script type="module">
+
+    import {
+        getAuth,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    import {
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    import { app, db } from "../JS/firebase.js";
+
+
+    const auth = getAuth(app);
+
+
+    function getInitials(name) {
+
+        if (!name) {
+            return "--";
+        }
+
+
+        const parts = name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0].charAt(0) +
+            parts[parts.length - 1].charAt(0)
+        ).toUpperCase();
+
+    }
+
+
+    function updateDoctorInterface(name) {
+
+        const doctorName =
+            name || "Médico";
+
+
+        const initials =
+            getInitials(doctorName);
+
+
+        const sidebarName =
+            document.getElementById(
+                "recordDoctorName"
+            );
+
+
+        const topName =
+            document.getElementById(
+                "recordDoctorNameTop"
+            );
+
+
+        const sidebarAvatar =
+            document.getElementById(
+                "recordDoctorAvatar"
+            );
+
+
+        const topAvatar =
+            document.getElementById(
+                "recordDoctorAvatarTop"
+            );
+
+
+        if (sidebarName) {
+
+            sidebarName.textContent =
+                doctorName;
+
+        }
+
+
+        if (topName) {
+
+            topName.textContent =
+                doctorName;
+
+        }
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (topAvatar) {
+
+            topAvatar.textContent =
+                initials;
+
+        }
+
+    }
+
+
+    onAuthStateChanged(auth, async (user) => {
+
+        if (!user) {
+            return;
+        }
+
+
+        try {
+
+            const doctorRef =
+                doc(db, "doctors", user.uid);
+
+
+            const doctorSnapshot =
+                await getDoc(doctorRef);
+
+
+            let doctorName = "";
+
+
+            if (doctorSnapshot.exists()) {
+
+                const doctorData =
+                    doctorSnapshot.data();
+
+
+                doctorName =
+                    doctorData.name || "";
+
+            }
+
+
+            /*
+             * Caso o documento ainda não tenha nome,
+             * usamos o nome salvo na conta do Firebase.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.displayName || "";
+
+            }
+
+
+            /*
+             * Último fallback:
+             * usamos o e-mail da conta.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.email || "Médico";
+
+            }
+
+
+            updateDoctorInterface(
+                doctorName
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Erro ao carregar dados do médico:",
+                error
+            );
+
+
+            /*
+             * Mesmo que ocorra algum problema
+             * no Firestore, usamos o nome da conta.
+             */
+
+            updateDoctorInterface(
+                user.displayName ||
+                user.email ||
+                "Médico"
+            );
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

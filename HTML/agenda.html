@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+
+    <!-- =====================================================
+         ESTILO DO BOTÃO SAIR
+         ===================================================== -->
+
+    <style>
+
+        .topbar-logout {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 1px solid #d9e3df;
+
+            background: #ffffff;
+
+            color: #dc3545;
+
+            border-radius: 9px;
+
+            padding: 9px 14px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+
+            white-space: nowrap;
+
+        }
+
+
+        .topbar-logout img {
+
+            width: 18px;
+
+            height: 18px;
+
+            object-fit: contain;
+
+            display: block;
+
+        }
+
+
+        .topbar-logout:hover {
+
+            background: #fff5f5;
+
+            border-color: #f1b8be;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .topbar-logout:active {
+
+            transform: translateY(0);
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .topbar-logout {
+
+                padding: 9px 11px;
+
+                gap: 0;
+
+            }
+
+
+            .topbar-logout span {
+
+                display: none;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo-area">
+
+            <img
+                src="../IMG/logo-gbsmedconnect.png"
+                alt="GBSMedConnect - Gestão Médica"
+                class="logo-image"
+            >
+
+        </div>
+
+
+        <div class="menu-title">
+
+            MENU PRINCIPAL
+
+        </div>
+
+
+        <nav class="menu">
+
+
+            <a href="dashboard.html" class="menu-item">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="agenda.html" class="menu-item active">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Agenda</span>
+
+            </a>
+
+
+            <a href="pacientes.html" class="menu-item">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Pacientes</span>
+
+            </a>
+
+
+            <a href="prontuario.html" class="menu-item">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Prontuários</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title menu-secondary">
+
+            OUTROS
+
+        </div>
+
+
+        <nav class="menu">
+
+
+            <a href="perfil.html" class="menu-item">
+
+                <span class="menu-icon">◉</span>
+
+                <span>Meu perfil</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+
+            <div class="doctor-mini">
+
+
+                <div
+                    class="doctor-avatar"
+                    id="agendaDoctorAvatar"
+                >
+
+                    --
+
+                </div>
+
+
+                <div>
+
+                    <strong id="agendaDoctorName">
+
+                        Carregando...
+
+                    </strong>
+
+                    <small>Médico</small>
+
+                </div>
+
+
+                <span class="doctor-arrow">
+
+                    ›
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-search">
+
+
+                <span>⌕</span>
+
+
+                <input
+                    type="text"
+                    id="topSearch"
+                    placeholder="Pesquisar pacientes, consultas..."
+                >
+
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <button
+                    class="notification"
+                    type="button"
+                    aria-label="Notificações"
+                >
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+
+                    <div
+                        class="doctor-avatar small"
+                        id="agendaDoctorAvatarTop"
+                    >
+
+                        --
+
+                    </div>
+
+
+                    <div>
+
+                        <strong id="agendaDoctorNameTop">
+
+                            Carregando...
+
+                        </strong>
+
+                        <small>Administrador</small>
+
+                    </div>
+
+
+                    <span>⌄</span>
+
+
+                </div>
+
+
+                <!-- BOTÃO SAIR -->
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="topbar-logout"
+                    title="Sair da conta"
+                    aria-label="Sair da conta"
+                >
+
+                    <img
+                        src="../IMG/sair.png"
+                        alt="Sair"
+                    >
+
+                    <span>Sair</span>
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             AGENDA
+             ================================================= -->
+
+        <section class="dashboard agenda-page">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="page-heading">
+
+
+                <div>
+
+                    <h1>Agenda</h1>
+
+                    <p>
+                        Acompanhe e gerencie suas consultas.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    id="newAppointmentButton"
+                    type="button"
+                >
+
+                    + Nova consulta
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONTROLES DA AGENDA
+                 ================================================= -->
+
+            <div class="agenda-controls">
+
+
+                <div class="agenda-navigation">
+
+
+                    <button
+                        class="calendar-nav"
+                        type="button"
+                        aria-label="Semana anterior"
+                    >
+
+                        ‹
+
+                    </button>
+
+
+                    <button
+                        class="today-button"
+                        type="button"
+                    >
+
+                        Hoje
+
+                    </button>
+
+
+                    <button
+                        class="calendar-nav"
+                        type="button"
+                        aria-label="Próxima semana"
+                    >
+
+                        ›
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="current-month">
+
+
+                    <strong>
+
+                        Setembro 2026
+
+                    </strong>
+
+
+                </div>
+
+
+                <div class="agenda-view-buttons">
+
+
+                    <button
+                        class="view-button active"
+                        type="button"
+                    >
+
+                        Semana
+
+                    </button>
+
+
+                    <button
+                        class="view-button"
+                        type="button"
+                    >
+
+                        Dia
+
+                    </button>
+
+
+                    <button
+                        class="view-button"
+                        type="button"
+                    >
+
+                        Lista
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CALENDÁRIO
+                 ================================================= -->
+
+            <section class="agenda-card">
+
+
+                <!-- CABEÇALHO DOS DIAS -->
+
+                <div class="week-header">
+
+
+                    <div class="time-column">
+
+                        Horário
+
+                    </div>
+
+
+                    <div class="day-header">
+
+                        <span>SEG</span>
+
+                        <strong>14</strong>
+
+                    </div>
+
+
+                    <div class="day-header">
+
+                        <span>TER</span>
+
+                        <strong>15</strong>
+
+                    </div>
+
+
+                    <div class="day-header">
+
+                        <span>QUA</span>
+
+                        <strong class="selected-day">16</strong>
+
+                    </div>
+
+
+                    <div class="day-header">
+
+                        <span>QUI</span>
+
+                        <strong>17</strong>
+
+                    </div>
+
+
+                    <div class="day-header">
+
+                        <span>SEX</span>
+
+                        <strong>18</strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     HORÁRIOS
+                     ================================================= -->
+
+                <div class="calendar-body">
+
+
+                    <!-- 08:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            08:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 09:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            09:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 10:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            10:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 11:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            11:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 12:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            12:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 13:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            13:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 14:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            14:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 15:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            15:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 16:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            16:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+
+                    <!-- 17:00 -->
+
+                    <div class="calendar-row">
+
+
+                        <div class="time-column">
+
+                            17:00
+
+                        </div>
+
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+                        <div class="calendar-cell"></div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 RESUMO
+                 ================================================= -->
+
+            <div class="agenda-summary">
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon aqua">
+
+                        📅
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+
+                            Consultas hoje
+
+                        </span>
+
+
+                        <strong id="todayAppointments">
+
+                            0
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon blue">
+
+                        ✓
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+
+                            Confirmadas
+
+                        </span>
+
+
+                        <strong id="confirmedAppointments">
+
+                            0
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon orange">
+
+                        ⏱
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+
+                            Aguardando
+
+                        </span>
+
+
+                        <strong id="waitingAppointments">
+
+                            0
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon purple">
+
+                        ◷
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+
+                            Próxima consulta
+
+                        </span>
+
+
+                        <strong id="nextAppointment">
+
+                            --
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <div class="dashboard-footer">
+
+
+                <span>
+
+                    GBSMedConnect © 2026
+
+                </span>
+
+
+                <span>
+
+                    Sistema de gerenciamento médico
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     MODAL NOVA CONSULTA
+     ========================================================= -->
+
+<div
+    class="patient-modal"
+    id="appointmentModal"
+>
+
+
+    <div class="patient-modal-content">
+
+
+        <!-- CABEÇALHO DO MODAL -->
+
+        <div class="patient-modal-header">
+
+
+            <div>
+
+                <h2 id="appointmentModalTitle">
+
+                    Nova consulta
+
+                </h2>
+
+
+                <p>
+
+                    Cadastre uma nova consulta para um paciente.
+
+                </p>
+
+
+            </div>
+
+
+            <button
+                type="button"
+                class="patient-modal-close"
+                id="closeAppointmentModal"
+                aria-label="Fechar"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- FORMULÁRIO -->
+
+        <form id="appointmentForm">
+
+
+            <div class="patient-form-grid">
+
+
+                <!-- PACIENTE -->
+
+                <div class="form-group">
+
+
+                    <label for="appointmentPatient">
+
+                        Paciente
+
+                    </label>
+
+
+                    <select
+                        id="appointmentPatient"
+                        required
+                    >
+
+
+                        <option value="">
+
+                            Carregando pacientes...
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- TIPO -->
+
+                <div class="form-group">
+
+
+                    <label for="appointmentType">
+
+                        Tipo de consulta
+
+                    </label>
+
+
+                    <select
+                        id="appointmentType"
+                        required
+                    >
+
+
+                        <option value="">
+
+                            Selecione
+
+                        </option>
+
+
+                        <option value="Consulta clínica">
+
+                            Consulta clínica
+
+                        </option>
+
+
+                        <option value="Retorno">
+
+                            Retorno
+
+                        </option>
+
+
+                        <option value="Avaliação">
+
+                            Avaliação
+
+                        </option>
+
+
+                        <option value="Acompanhamento">
+
+                            Acompanhamento
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- DATA -->
+
+                <div class="form-group">
+
+
+                    <label for="appointmentDate">
+
+                        Data
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="appointmentDate"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- HORÁRIO -->
+
+                <div class="form-group">
+
+
+                    <label for="appointmentTime">
+
+                        Horário
+
+                    </label>
+
+
+                    <input
+                        type="time"
+                        id="appointmentTime"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <!-- OBSERVAÇÕES -->
+
+                <div class="form-group full-width">
+
+
+                    <label for="appointmentNotes">
+
+                        Observações
+
+                    </label>
+
+
+                    <textarea
+                        id="appointmentNotes"
+                        rows="4"
+                        placeholder="Observações sobre a consulta..."
+                    ></textarea>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- RODAPÉ -->
+
+            <div class="patient-modal-footer">
+
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="cancelAppointmentButton"
+                >
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="saveAppointmentButton"
+                >
+
+                    Salvar consulta
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- JAVASCRIPT PRINCIPAL -->
+
+<script
+    type="module"
+    src="../JS/app.js"
+></script>
+
+
+
+<!-- =========================================================
+     NOME DO MÉDICO LOGADO
+     ========================================================= -->
+
+<script type="module">
+
+
+    import {
+        getAuth,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+    import {
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+    import { app, db } from "../JS/firebase.js";
+
+
+    const auth = getAuth(app);
+
+
+
+    function getInitials(name) {
+
+
+        if (!name) {
+
+            return "--";
+
+        }
+
+
+        const parts = name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+
+            parts[0].charAt(0) +
+            parts[parts.length - 1].charAt(0)
+
+        ).toUpperCase();
+
+    }
+
+
+
+    function updateDoctorInterface(name) {
+
+
+        const doctorName =
+            name || "Médico";
+
+
+        const initials =
+            getInitials(doctorName);
+
+
+
+        const sidebarName =
+            document.getElementById(
+                "agendaDoctorName"
+            );
+
+
+        const topName =
+            document.getElementById(
+                "agendaDoctorNameTop"
+            );
+
+
+        const sidebarAvatar =
+            document.getElementById(
+                "agendaDoctorAvatar"
+            );
+
+
+        const topAvatar =
+            document.getElementById(
+                "agendaDoctorAvatarTop"
+            );
+
+
+
+        if (sidebarName) {
+
+            sidebarName.textContent =
+                doctorName;
+
+        }
+
+
+        if (topName) {
+
+            topName.textContent =
+                doctorName;
+
+        }
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (topAvatar) {
+
+            topAvatar.textContent =
+                initials;
+
+        }
+
+    }
+
+
+
+    onAuthStateChanged(auth, async (user) => {
+
+
+        if (!user) {
+
+            return;
+
+        }
+
+
+
+        try {
+
+
+            const doctorRef =
+                doc(db, "doctors", user.uid);
+
+
+            const doctorSnapshot =
+                await getDoc(doctorRef);
+
+
+            let doctorName = "";
+
+
+
+            if (doctorSnapshot.exists()) {
+
+
+                const doctorData =
+                    doctorSnapshot.data();
+
+
+                doctorName =
+                    doctorData.name || "";
+
+            }
+
+
+
+            /*
+             * Caso ainda não exista o nome no Firestore,
+             * usamos o nome da conta do Firebase.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.displayName || "";
+
+            }
+
+
+
+            /*
+             * Último fallback: e-mail da conta.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.email || "Médico";
+
+            }
+
+
+
+            updateDoctorInterface(
+                doctorName
+            );
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Erro ao carregar dados do médico:",
+                error
+            );
+
+
+
+            /*
+             * Mesmo que o Firestore apresente algum erro,
+             * tentamos usar o nome da conta autenticada.
+             */
+
+            updateDoctorInterface(
+
+                user.displayName ||
+                user.email ||
+                "Médico"
+
+            );
+
+        }
+
+
+    });
+
+
+</script>
+
+
+</body>
+
+</html>

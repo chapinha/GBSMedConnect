@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <img
+                src="../IMG/logo-gbsmedconnect.png"
+                alt="GBSMedConnect - Gestão Médica"
+                class="logo-image"
+            >
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU PRINCIPAL
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item active">
+                <span class="menu-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="agenda.html" class="menu-item">
+                <span class="menu-icon">▣</span>
+                <span>Agenda</span>
+            </a>
+
+            <a href="pacientes.html" class="menu-item">
+                <span class="menu-icon">♙</span>
+                <span>Pacientes</span>
+            </a>
+
+            <a href="prontuario.html" class="menu-item">
+                <span class="menu-icon">▤</span>
+                <span>Prontuários</span>
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title menu-secondary">
+            OUTROS
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="perfil.html" class="menu-item">
+                <span class="menu-icon">◉</span>
+                <span>Meu perfil</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="doctor-mini">
+
+                <div class="doctor-avatar" id="dashboardDoctorAvatar">
+                    --
+                </div>
+
+                <div>
+                    <strong id="dashboardDoctorName">Carregando...</strong>
+                    <small>Médico</small>
+                </div>
+
+                <span class="doctor-arrow">›</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div class="mobile-logo">
+                GBSMedConnect
+            </div>
+
+
+            <div class="topbar-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Pesquisar pacientes, consultas..."
+                >
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification"
+                    type="button"
+                    aria-label="Notificações"
+                >
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div class="doctor-avatar small" id="dashboardDoctorAvatarTop">
+                        --
+                    </div>
+
+                    <div>
+                        <strong id="dashboardDoctorNameTop">
+                            Carregando...
+                        </strong>
+
+                        <small>Administrador</small>
+                    </div>
+
+                    <span>⌄</span>
+
+                </div>
+
+
+                <!-- BOTÃO SAIR -->
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="topbar-logout"
+                    title="Sair da conta"
+                    aria-label="Sair da conta"
+                >
+
+                    <img
+                        src="../IMG/sair.png"
+                        alt="Sair"
+                    >
+
+                    <span>
+                        Sair
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section class="dashboard">
+
+            <!-- CABEÇALHO -->
+            <div class="page-heading">
+
+                <div>
+
+                    <h1 id="dashboardGreeting">
+                        Olá!
+                    </h1>
+
+                    <p>
+                        Aqui está um resumo da sua clínica hoje.
+                    </p>
+
+                </div>
+
+                <button
+                    id="newAppointmentButton"
+                    class="primary-button"
+                    type="button"
+                >
+                    + Nova consulta
+                </button>
+
+            </div>
+
+
+            <!-- CARDS -->
+            <div class="stats-grid">
+
+                <!-- CONSULTAS HOJE -->
+                <div class="stat-card">
+
+                    <div class="stat-icon aqua">
+
+                        <img
+                            src="../IMG/agenda.png"
+                            alt="Consultas"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Consultas hoje</span>
+
+                        <strong id="dashboardTodayCount">
+                            0
+                        </strong>
+
+                        <small>
+                            Consultas agendadas para hoje
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL DE PACIENTES -->
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <img
+                            src="../IMG/pacientes.png"
+                            alt="Pacientes"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Total de pacientes</span>
+
+                        <strong id="dashboardPatientsCount">
+                            0
+                        </strong>
+
+                        <small>
+                            Pacientes cadastrados
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRONTUÁRIOS -->
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <img
+                            src="../IMG/prancheta.png"
+                            alt="Prontuários"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Prontuários</span>
+
+                        <strong>
+                            —
+                        </strong>
+
+                        <small>
+                            Registros cadastrados
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATENDIMENTOS -->
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ✓
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Atendimentos</span>
+
+                        <strong>
+                            —
+                        </strong>
+
+                        <small>
+                            Dados disponíveis em breve
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÁREA INFERIOR -->
+            <div class="dashboard-grid">
+
+                <!-- CONSULTAS -->
+                <section class="dashboard-card appointments-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Próximas consultas</h2>
+
+                            <p>
+                                Consultas agendadas para hoje
+                            </p>
+
+                        </div>
+
+                        <a href="agenda.html">
+                            Ver agenda →
+                        </a>
+
+                    </div>
+
+
+                    <!--
+                        O dashboard.js irá preencher esta área
+                        com as consultas reais do Firestore.
+                    -->
+                    <div
+                        class="appointments-list"
+                        id="dashboardAppointmentsList"
+                    >
+
+                        <div class="empty-state">
+                            <p>Carregando consultas...</p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACESSO RÁPIDO -->
+                <section class="dashboard-card quick-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Acesso rápido</h2>
+
+                            <p>
+                                Ações frequentes
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <a
+                            href="pacientes.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon aqua">
+                                +
+                            </div>
+
+                            <div>
+                                <strong>Novo paciente</strong>
+                                <span>Cadastrar paciente</span>
+                            </div>
+
+                            <b>›</b>
+
+                        </a>
+
+
+                        <a
+                            href="agenda.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon blue">
+
+                                <img
+                                    src="../IMG/agenda.png"
+                                    alt="Nova consulta"
+                                    style="width: 28px; height: 28px; object-fit: contain; display: block;"
+                                >
+
+                            </div>
+
+                            <div>
+                                <strong>Nova consulta</strong>
+                                <span>Agendar atendimento</span>
+                            </div>
+
+                            <b>›</b>
+
+                        </a>
+
+
+                        <a
+                            href="prontuario.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon purple">
+
+                                <img
+                                    src="../IMG/prancheta.png"
+                                    alt="Novo prontuário"
+                                    style="width: 28px; height: 28px; object-fit: contain; display: block;"
+                                >
+
+                            </div>
+
+                            <div>
+                                <strong>Novo prontuário</strong>
+                                <span>Registrar atendimento</span>
+                            </div>
+
+                            <b>›</b>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RODAPÉ -->
+            <div class="dashboard-footer">
+
+                <span>
+                    GBSMedConnect © 2026
+                </span>
+
+                <span>
+                    Sistema de gerenciamento médico
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT PRINCIPAL -->
+<script
+    type="module"
+    src="../JS/app.js"
+></script>
+
+<!-- JAVASCRIPT DO DASHBOARD -->
+<script
+    type="module"
+    src="../JS/dashboard.js"
+></script>
+
+</body>
+</html>

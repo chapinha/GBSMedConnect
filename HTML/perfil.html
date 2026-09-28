@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Perfil | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+
+    <!-- =====================================================
+         ESTILO DO BOTÃO SAIR
+         ===================================================== -->
+
+    <style>
+
+        .topbar-logout {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border: 1px solid #d9e3df;
+            background: #ffffff;
+
+            color: #dc3545;
+
+            border-radius: 9px;
+
+            padding: 9px 14px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+
+            white-space: nowrap;
+        }
+
+
+        .topbar-logout img {
+            width: 18px;
+            height: 18px;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+
+        .topbar-logout:hover {
+            background: #fff5f5;
+
+            border-color: #f1b8be;
+
+            transform: translateY(-1px);
+        }
+
+
+        .topbar-logout:active {
+            transform: translateY(0);
+        }
+
+
+        @media (max-width: 750px) {
+
+            .topbar-logout {
+                padding: 9px 11px;
+                gap: 0;
+            }
+
+
+            .topbar-logout span {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <img
+                src="../IMG/logo-gbsmedconnect.png"
+                alt="GBSMedConnect - Gestão Médica"
+                class="logo-image"
+            >
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU PRINCIPAL
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="agenda.html" class="menu-item">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Agenda</span>
+
+            </a>
+
+
+            <a href="pacientes.html" class="menu-item">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Pacientes</span>
+
+            </a>
+
+
+            <a href="prontuario.html" class="menu-item">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Prontuários</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title menu-secondary">
+            OUTROS
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="perfil.html" class="menu-item active">
+
+                <span class="menu-icon">◉</span>
+
+                <span>Meu perfil</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- PERFIL RESUMIDO DA SIDEBAR -->
+
+        <div class="sidebar-bottom">
+
+            <div class="doctor-mini">
+
+                <div
+                    class="doctor-avatar"
+                    id="sidebarDoctorAvatar"
+                >
+                    GS
+                </div>
+
+
+                <div>
+
+                    <strong id="sidebarDoctorName">
+                        Carregando...
+                    </strong>
+
+                    <small>
+                        Médico
+                    </small>
+
+                </div>
+
+
+                <span class="doctor-arrow">
+                    ›
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ===================================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Pesquisar pacientes, consultas..."
+                >
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification"
+                    type="button"
+                    aria-label="Notificações"
+                >
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="doctor-avatar small"
+                        id="topDoctorAvatar"
+                    >
+                        GS
+                    </div>
+
+
+                    <div>
+
+                        <strong id="topDoctorName">
+                            Carregando...
+                        </strong>
+
+                        <small>
+                            Médico
+                        </small>
+
+                    </div>
+
+
+                    <span>
+                        ⌄
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÃO SAIR
+                     ================================================= -->
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="topbar-logout"
+                    title="Sair da conta"
+                    aria-label="Sair da conta"
+                >
+
+                    <img
+                        src="../IMG/sair.png"
+                        alt="Sair"
+                    >
+
+                    <span>
+                        Sair
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ===================================================== -->
+        <!-- PERFIL -->
+        <!-- ===================================================== -->
+
+        <section class="dashboard profile-page">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="page-heading">
+
+                <div>
+
+                    <h1>
+                        Meu perfil
+                    </h1>
+
+                    <p>
+                        Gerencie suas informações profissionais.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <!-- PERFIL PRINCIPAL -->
+            <!-- ===================================================== -->
+
+            <div class="profile-grid">
+
+
+                <!-- ================================================= -->
+                <!-- CARD DE IDENTIFICAÇÃO -->
+                <!-- ================================================= -->
+
+                <section class="dashboard-card profile-card">
+
+
+                    <div class="profile-cover"></div>
+
+
+                    <div class="profile-main">
+
+
+                        <div
+                            class="profile-avatar"
+                            id="profileAvatar"
+                        >
+                            GS
+                        </div>
+
+
+                        <div class="profile-name">
+
+                            <h2 id="profileDisplayName">
+                                Carregando...
+                            </h2>
+
+
+                            <p id="profileDisplaySpecialty">
+                                Médico
+                            </p>
+
+
+                            <span class="profile-status">
+
+                                ● Conta ativa
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- INFORMAÇÕES DO PERFIL -->
+
+                    <div class="profile-info">
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Especialidade
+                            </span>
+
+                            <strong id="displaySpecialty">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                CRM
+                            </span>
+
+                            <strong id="displayCrm">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                E-mail
+                            </span>
+
+                            <strong id="displayEmail">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Telefone
+                            </span>
+
+                            <strong id="displayPhone">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ================================================= -->
+                <!-- EDITAR PERFIL -->
+                <!-- ================================================= -->
+
+                <section class="dashboard-card profile-edit-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Informações pessoais
+                            </h2>
+
+                            <p>
+                                Atualize seus dados profissionais.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-form">
+
+
+                        <!-- NOME + ESPECIALIDADE -->
+
+                        <div class="profile-form-row">
+
+
+                            <div class="form-group">
+
+                                <label for="profileName">
+                                    Nome completo
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="profileName"
+                                    placeholder="Digite seu nome completo"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label for="profileSpecialty">
+                                    Especialidade
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="profileSpecialty"
+                                    placeholder="Ex.: Clínico Geral"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- CRM + TELEFONE -->
+
+                        <div class="profile-form-row">
+
+
+                            <div class="form-group">
+
+                                <label for="profileCrm">
+                                    CRM
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="profileCrm"
+                                    placeholder="Ex.: CRM 123456"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label for="profilePhone">
+                                    Telefone
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    id="profilePhone"
+                                    placeholder="(00) 00000-0000"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- E-MAIL -->
+
+                        <div class="form-group">
+
+                            <label for="profileEmail">
+                                E-mail
+                            </label>
+
+
+                            <input
+                                type="email"
+                                id="profileEmail"
+                                placeholder="seuemail@email.com"
+                            >
+
+                        </div>
+
+
+
+                        <!-- ENDEREÇO -->
+
+                        <div class="form-group">
+
+                            <label for="profileAddress">
+                                Endereço profissional
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="profileAddress"
+                                placeholder="Rua, número, bairro..."
+                            >
+
+                        </div>
+
+
+
+                        <!-- MENSAGEM -->
+
+                        <div
+                            id="profileMessage"
+                            style="
+                                display: none;
+                                margin-top: 5px;
+                                padding: 12px 14px;
+                                border-radius: 10px;
+                                font-size: 14px;
+                            "
+                        >
+                        </div>
+
+
+
+                        <!-- BOTÕES -->
+
+                        <div class="form-actions">
+
+
+                            <button
+                                class="secondary-button"
+                                id="cancelProfileButton"
+                                type="button"
+                            >
+                                Cancelar
+                            </button>
+
+
+
+                            <button
+                                class="primary-button"
+                                id="saveProfileButton"
+                                type="button"
+                            >
+                                Salvar alterações
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <!-- SEGURANÇA -->
+            <!-- ===================================================== -->
+
+            <section class="dashboard-card security-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Segurança da conta
+                        </h2>
+
+                        <p>
+                            Gerencie as configurações de acesso da sua conta.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+                        🔒
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            Senha da conta
+                        </strong>
+
+                        <span>
+                            Altere sua senha para manter sua conta protegida.
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="secondary-button"
+                        id="changePasswordButton"
+                        type="button"
+                    >
+                        Alterar senha
+                    </button>
+
+
+                </div>
+
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+                        ✉
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            E-mail de acesso
+                        </strong>
+
+                        <span id="securityEmail">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <span class="security-confirmed">
+                        Verificado
+                    </span>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ===================================================== -->
+            <!-- FOOTER -->
+            <!-- ===================================================== -->
+
+            <div class="dashboard-footer">
+
+                <span>
+                    GBSMedConnect © 2026
+                </span>
+
+                <span>
+                    Sistema de gerenciamento médico
+                </span>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- FIREBASE -->
+<!-- ===================================================== -->
+
+<script
+    type="module"
+    src="../JS/app.js"
+></script>
+
+
+<script
+    type="module"
+    src="../JS/perfil.js"
+></script>
+
+
+</body>
+
+</html>

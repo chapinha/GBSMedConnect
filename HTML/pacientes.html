@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pacientes | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <img
+                src="../IMG/logo-gbsmedconnect.png"
+                alt="GBSMedConnect - Gestão Médica"
+                class="logo-image"
+            >
+
+        </div>
+
+
+        <div class="menu-title">
+            MENU PRINCIPAL
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="agenda.html" class="menu-item">
+
+                <span class="menu-icon">▣</span>
+
+                <span>Agenda</span>
+
+            </a>
+
+
+            <a href="pacientes.html" class="menu-item active">
+
+                <span class="menu-icon">♙</span>
+
+                <span>Pacientes</span>
+
+            </a>
+
+
+            <a href="prontuario.html" class="menu-item">
+
+                <span class="menu-icon">▤</span>
+
+                <span>Prontuários</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title menu-secondary">
+            OUTROS
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="perfil.html" class="menu-item">
+
+                <span class="menu-icon">◉</span>
+
+                <span>Meu perfil</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="doctor-mini">
+
+                <div
+                    class="doctor-avatar"
+                    id="patientsDoctorAvatar"
+                >
+                    --
+                </div>
+
+                <div>
+
+                    <strong id="patientsDoctorName">
+                        Carregando...
+                    </strong>
+
+                    <small>Médico</small>
+
+                </div>
+
+                <span class="doctor-arrow">
+                    ›
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ===================================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="topSearch"
+                    placeholder="Pesquisar pacientes..."
+                >
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification"
+                    type="button"
+                >
+
+                    🔔
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="doctor-avatar small"
+                        id="patientsDoctorAvatarTop"
+                    >
+                        --
+                    </div>
+
+                    <div>
+
+                        <strong id="patientsDoctorNameTop">
+                            Carregando...
+                        </strong>
+
+                        <small>Administrador</small>
+
+                    </div>
+
+                    <span>⌄</span>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- BOTÃO SAIR -->
+                <!-- ================================================= -->
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="topbar-logout"
+                    title="Sair da conta"
+                    aria-label="Sair da conta"
+                >
+
+                    <img
+                        src="../IMG/sair.png"
+                        alt="Sair"
+                    >
+
+                    <span>
+                        Sair
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ===================================================== -->
+        <!-- PÁGINA DE PACIENTES -->
+        <!-- ===================================================== -->
+
+        <section class="dashboard patients-page">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="page-heading">
+
+                <div>
+
+                    <h1>Pacientes</h1>
+
+                    <p>
+                        Gerencie os pacientes cadastrados na clínica.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    id="newPatientButton"
+                    type="button"
+                >
+                    + Novo paciente
+                </button>
+
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <!-- ESTATÍSTICAS -->
+            <!-- ===================================================== -->
+
+            <div class="stats-grid patients-stats">
+
+
+                <!-- TOTAL DE PACIENTES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon aqua">
+
+                        <img
+                            src="../IMG/pacientes.png"
+                            alt="Pacientes"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Total de pacientes</span>
+
+                        <strong id="totalPatients">
+                            0
+                        </strong>
+
+                        <small class="positive">
+                            Pacientes cadastrados
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PACIENTES ATIVOS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <img
+                            src="../IMG/pacientes.png"
+                            alt="Pacientes ativos"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Pacientes ativos</span>
+
+                        <strong id="activePatients">
+                            0
+                        </strong>
+
+                        <small>
+                            Pacientes ativos
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NOVOS ESTE MÊS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <img
+                            src="../IMG/agenda.png"
+                            alt="Novos pacientes"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Novos este mês</span>
+
+                        <strong id="newPatients">
+                            0
+                        </strong>
+
+                        <small>
+                            Cadastros recentes
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ATENDIMENTOS HOJE -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <img
+                            src="../IMG/prancheta.png"
+                            alt="Atendimentos"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
+                    </div>
+
+                    <div class="stat-information">
+
+                        <span>Atendimentos hoje</span>
+
+                        <strong>
+                            0
+                        </strong>
+
+                        <small>
+                            Nenhum atendimento registrado
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ===================================================== -->
+            <!-- LISTA DE PACIENTES -->
+            <!-- ===================================================== -->
+
+            <section class="dashboard-card patients-card">
+
+
+                <div class="patients-toolbar">
+
+                    <div>
+
+                        <h2>
+                            Lista de pacientes
+                        </h2>
+
+                        <p>
+                            Pacientes cadastrados no sistema
+                        </p>
+
+                    </div>
+
+
+                    <div class="patient-search">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="patientSearch"
+                            placeholder="Buscar paciente..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TABELA -->
+
+                <div class="patients-table-container">
+
+                    <table class="patients-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Paciente</th>
+
+                                <th>CPF</th>
+
+                                <th>Telefone</th>
+
+                                <th>Última consulta</th>
+
+                                <th>Status</th>
+
+                                <th>Ações</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <!--
+                            A tabela começa vazia.
+                            O app.js irá carregar os pacientes
+                            diretamente do Firestore.
+                        -->
+
+                        <tbody id="patientsTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- PAGINAÇÃO -->
+
+                <div class="patients-pagination">
+
+                    <span id="paginationText">
+                        Pacientes carregados do sistema
+                    </span>
+
+                    <div>
+
+                        <button
+                            class="pagination-button"
+                            type="button"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            class="pagination-button selected"
+                            type="button"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            class="pagination-button"
+                            type="button"
+                        >
+                            2
+                        </button>
+
+                        <button
+                            class="pagination-button"
+                            type="button"
+                        >
+                            3
+                        </button>
+
+                        <button
+                            class="pagination-button"
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- FOOTER -->
+
+            <div class="dashboard-footer">
+
+                <span>
+                    GBSMedConnect © 2026
+                </span>
+
+                <span>
+                    Sistema de gerenciamento médico
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- MODAL PACIENTE -->
+<!-- ===================================================== -->
+
+<div
+    class="patient-modal"
+    id="patientModal"
+>
+
+    <div class="patient-modal-content">
+
+
+        <div class="patient-modal-header">
+
+            <div>
+
+                <h2 id="patientModalTitle">
+                    Novo paciente
+                </h2>
+
+                <p id="patientModalDescription">
+                    Cadastre os dados do paciente.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="patient-modal-close"
+                id="closePatientModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="patientForm">
+
+
+            <div class="patient-form-grid">
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientName">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientName"
+                        placeholder="Digite o nome completo"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientCpf">
+                        CPF
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientCpf"
+                        placeholder="000.000.000-00"
+                    >
+
+                </div>
+
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientBirthDate">
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="patientBirthDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientPhone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="patientPhone"
+                        placeholder="(00) 00000-0000"
+                    >
+
+                </div>
+
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientEmail">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="patientEmail"
+                        placeholder="paciente@email.com"
+                    >
+
+                </div>
+
+
+
+                <div class="patient-form-group">
+
+                    <label for="patientAddress">
+                        Endereço
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientAddress"
+                        placeholder="Rua, número, bairro"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="patient-modal-actions">
+
+
+                <button
+                    type="button"
+                    class="patient-cancel-button"
+                    id="cancelPatientButton"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="savePatientButton"
+                >
+                    Salvar paciente
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- ESTILO DO MODAL -->
+<!-- ===================================================== -->
+
+<style>
+
+.patient-modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.patient-modal.active {
+
+    display: flex !important;
+
+}
+
+
+.patient-modal-content {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+}
+
+
+.patient-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.patient-modal-header h2 {
+
+    margin: 0 0 6px;
+
+    font-size: 22px;
+
+    color: #1f2937;
+
+}
+
+
+.patient-modal-header p {
+
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 14px;
+
+}
+
+
+.patient-modal-close {
+
+    border: none;
+
+    background: #f1f5f4;
+
+    color: #64748b;
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 10px;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+}
+
+
+.patient-modal-close:hover {
+
+    background: #e8f8f5;
+
+    color: #168f82;
+
+}
+
+
+.patient-form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+}
+
+
+.patient-form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.patient-form-group label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+
+}
+
+
+.patient-form-group input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 12px 14px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+}
+
+
+.patient-form-group input:focus {
+
+    border-color: #20b8a6;
+
+    box-shadow: 0 0 0 3px rgba(32, 184, 166, 0.10);
+
+}
+
+
+.patient-modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 28px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e8eeee;
+
+}
+
+
+.patient-cancel-button {
+
+    border: 1px solid #dbe5e3;
+
+    background: #ffffff;
+
+    color: #4b5563;
+
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+.patient-cancel-button:hover {
+
+    background: #f5f9f8;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .patient-form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .patient-modal-content {
+
+        padding: 20px;
+
+    }
+
+
+    .patient-modal-actions {
+
+        flex-direction: column-reverse;
+
+    }
+
+
+    .patient-modal-actions button {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>
+
+
+
+<!-- ===================================================== -->
+<!-- ABRIR / FECHAR MODAL -->
+<!-- ===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const newPatientButton =
+        document.getElementById("newPatientButton");
+
+
+    const patientModal =
+        document.getElementById("patientModal");
+
+
+    const closePatientModal =
+        document.getElementById("closePatientModal");
+
+
+    const cancelPatientButton =
+        document.getElementById("cancelPatientButton");
+
+
+    const patientForm =
+        document.getElementById("patientForm");
+
+
+
+    console.log("Página de pacientes carregada.");
+
+    console.log(
+        "Botão Novo paciente:",
+        newPatientButton
+    );
+
+    console.log(
+        "Modal:",
+        patientModal
+    );
+
+
+
+    /* ABRIR */
+
+    if (newPatientButton && patientModal) {
+
+        newPatientButton.addEventListener(
+            "click",
+            function () {
+
+                console.log(
+                    "Abrindo modal de paciente..."
+                );
+
+                patientModal.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* FECHAR NO X */
+
+    if (closePatientModal) {
+
+        closePatientModal.addEventListener(
+            "click",
+            function () {
+
+                patientModal.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* FECHAR NO CANCELAR */
+
+    if (cancelPatientButton) {
+
+        cancelPatientButton.addEventListener(
+            "click",
+            function () {
+
+                patientModal.classList.remove(
+                    "active"
+                );
+
+
+                if (patientForm) {
+
+                    patientForm.reset();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* FECHAR CLICANDO FORA */
+
+    if (patientModal) {
+
+        patientModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === patientModal
+                ) {
+
+                    patientModal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+
+
+<!-- ===================================================== -->
+<!-- FIREBASE / APP PRINCIPAL -->
+<!-- ===================================================== -->
+
+<script
+    type="module"
+    src="../JS/app.js"
+></script>
+
+
+
+<!-- ===================================================== -->
+<!-- NOME DO MÉDICO LOGADO -->
+<!-- ===================================================== -->
+
+<script type="module">
+
+    import {
+        getAuth,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    import {
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    import { app, db } from "../JS/firebase.js";
+
+
+    const auth = getAuth(app);
+
+
+    function getInitials(name) {
+
+        if (!name) {
+            return "--";
+        }
+
+
+        const parts = name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0].charAt(0) +
+            parts[parts.length - 1].charAt(0)
+        ).toUpperCase();
+
+    }
+
+
+    function updateDoctorInterface(name) {
+
+        const doctorName =
+            name || "Médico";
+
+
+        const initials =
+            getInitials(doctorName);
+
+
+        const sidebarName =
+            document.getElementById(
+                "patientsDoctorName"
+            );
+
+
+        const topName =
+            document.getElementById(
+                "patientsDoctorNameTop"
+            );
+
+
+        const sidebarAvatar =
+            document.getElementById(
+                "patientsDoctorAvatar"
+            );
+
+
+        const topAvatar =
+            document.getElementById(
+                "patientsDoctorAvatarTop"
+            );
+
+
+        if (sidebarName) {
+
+            sidebarName.textContent =
+                doctorName;
+
+        }
+
+
+        if (topName) {
+
+            topName.textContent =
+                doctorName;
+
+        }
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (topAvatar) {
+
+            topAvatar.textContent =
+                initials;
+
+        }
+
+    }
+
+
+    onAuthStateChanged(auth, async (user) => {
+
+        if (!user) {
+            return;
+        }
+
+
+        try {
+
+            const doctorRef =
+                doc(db, "doctors", user.uid);
+
+
+            const doctorSnapshot =
+                await getDoc(doctorRef);
+
+
+            let doctorName = "";
+
+
+            if (doctorSnapshot.exists()) {
+
+                const doctorData =
+                    doctorSnapshot.data();
+
+
+                doctorName =
+                    doctorData.name || "";
+
+            }
+
+
+            /*
+             * Caso o documento ainda não tenha nome,
+             * usamos o nome salvo na conta do Firebase.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.displayName || "";
+
+            }
+
+
+            /*
+             * Último fallback:
+             * usamos o e-mail da conta.
+             */
+
+            if (!doctorName) {
+
+                doctorName =
+                    user.email || "Médico";
+
+            }
+
+
+            updateDoctorInterface(
+                doctorName
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Erro ao carregar dados do médico:",
+                error
+            );
+
+
+            /*
+             * Mesmo que ocorra algum problema
+             * no Firestore, usamos o nome da conta.
+             */
+
+            updateDoctorInterface(
+                user.displayName ||
+                user.email ||
+                "Médico"
+            );
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

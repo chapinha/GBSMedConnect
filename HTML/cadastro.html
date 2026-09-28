@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta | GBSMedConnect</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-container">
+
+        <section class="auth-card">
+
+            <div class="auth-logo">
+
+                <div class="logo-icon">
+                    +
+                </div>
+
+                <div>
+                    <h1>GBSMedConnect</h1>
+                    <span>Gestão inteligente para clínicas</span>
+                </div>
+
+            </div>
+
+
+            <div class="auth-header">
+
+                <h2>Criar sua conta</h2>
+
+                <p>
+                    Cadastre-se para começar a utilizar o GBSMedConnect.
+                </p>
+
+            </div>
+
+
+            <form id="registerForm">
+
+                <div class="auth-form-group">
+
+                    <label for="registerName">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Digite seu nome"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label for="registerEmail">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label for="registerPassword">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Digite sua senha"
+                        required
+                        minlength="6"
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label for="registerPasswordConfirm">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPasswordConfirm"
+                        placeholder="Digite a senha novamente"
+                        required
+                        minlength="6"
+                    >
+
+                </div>
+
+
+                <div
+                    id="registerMessage"
+                    class="auth-message"
+                ></div>
+
+
+                <button
+                    type="submit"
+                    id="registerButton"
+                    class="auth-button"
+                >
+                    Criar conta
+                </button>
+
+            </form>
+
+
+            <div class="auth-footer">
+
+                <span>Já possui uma conta?</span>
+
+                <a href="login.html">
+                    Voltar para o login
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="../JS/cadastro.js">
+    </script>
+
+</body>
+
+</html>
