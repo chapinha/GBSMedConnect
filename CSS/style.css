@@ -3197,3 +3197,42 @@ body {
     }
 
 }
+
+/* =========================================================
+   MARCA-D'ÁGUA DA LOGO NA TELA DE CADASTRO
+========================================================= */
+
+.auth-page {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Logo grande no fundo */
+.auth-page::before {
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: -80px;
+
+    width: 850px;
+    height: 850px;
+
+    transform: translateX(-50%);
+
+    background-image: url("../IMG/logo-gbsmedconnect.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: 0.055;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Mantém o cadastro por cima da marca-d'água */
+.auth-container {
+    position: relative;
+    z-index: 1;
+}
