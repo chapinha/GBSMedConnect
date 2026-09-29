@@ -41,7 +41,6 @@ const loginMessage =
 function showMessage(message, type = "error") {
 
     if (!loginMessage) {
-        alert(message);
         return;
     }
 
@@ -295,32 +294,46 @@ if (forgotPasswordButton) {
 // ==========================================
 // VERIFICA SE JÁ ESTÁ LOGADO
 // ==========================================
+//
+// Esta verificação serve SOMENTE para a tela
+// de login.
+//
+// A página de cadastro NÃO deve ser redirecionada
+// para o dashboard por causa de uma sessão existente.
+//
+// O cadastro possui seu próprio fluxo no
+// cadastro.js.
+//
 
-onAuthStateChanged(
-    auth,
-    (user) => {
+if (loginForm) {
 
-        if (!user) {
-            return;
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            if (!user) {
+                return;
+            }
+
+
+            const currentPage =
+                window.location.pathname;
+
+
+            // Se o usuário já estiver logado
+            // e tentar abrir o login novamente,
+            // manda direto para o dashboard.
+
+            if (
+                currentPage.endsWith("/login.html") ||
+                currentPage.endsWith("/login")
+            ) {
+
+                window.location.href =
+                    "dashboard.html";
+            }
+
         }
+    );
 
-
-        const currentPage =
-            window.location.pathname;
-
-
-        // Se o usuário já estiver logado
-        // e tentar abrir o login novamente,
-        // manda direto para o dashboard.
-
-        if (
-            currentPage.endsWith("/login.html") ||
-            currentPage.endsWith("/login")
-        ) {
-
-            window.location.href =
-                "dashboard.html";
-        }
-
-    }
-);
+}
