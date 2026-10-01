@@ -760,6 +760,135 @@ a {
 }
 
 /* =========================================================
+   PAINEL DE DICAS E ESTATÍSTICAS RÁPIDAS
+========================================================= */
+
+.quick-insights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.quick-insights-card {
+    overflow: visible;
+}
+
+/* --- LISTA DE DICAS --- */
+
+.tips-list {
+    list-style: none;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.tip-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.tip-aqua  { background: var(--aqua-light);   color: var(--aqua-dark); }
+.tip-blue  { background: var(--blue-light);   color: #3988ce; }
+.tip-purple{ background: var(--purple-light); color: #7666d5; }
+.tip-orange{ background: var(--orange-light); color: #dd8839; }
+
+.tip-item strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+}
+
+.tip-item span {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* --- LISTA DE ESTATÍSTICAS --- */
+
+.quick-stats-list {
+    list-style: none;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.quick-stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.quick-stat-item:last-child {
+    border-bottom: none;
+}
+
+.quick-stat-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quick-stat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-aqua   { background: var(--aqua); }
+.dot-blue   { background: var(--blue); }
+.dot-purple { background: var(--purple); }
+.dot-orange { background: var(--orange); }
+
+.quick-stat-left span {
+    font-size: 13px;
+    color: var(--text-medium);
+}
+
+.quick-stat-item > strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.quick-stat-badge {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--aqua-dark) !important;
+    background: var(--aqua-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+    .quick-insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
    TOOLBAR DE PACIENTES
 ========================================================= */
 
