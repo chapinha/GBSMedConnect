@@ -3890,6 +3890,62 @@ async function loadPatients(doctorId) {
         }
 
 
+        // =========================================
+        // CALCULAR PACIENTES ATIVOS E NOVOS DO MÊS
+        // =========================================
+
+        var now       = new Date();
+        var thisYear  = now.getFullYear();
+        var thisMonth = now.getMonth();
+        var newThisMonth = 0;
+
+
+        snapshot.forEach(function (docSnap) {
+
+            var data = docSnap.data();
+
+            if (data.createdAt && data.createdAt.toDate) {
+
+                var created = data.createdAt.toDate();
+
+                if (
+                    created.getFullYear() === thisYear &&
+                    created.getMonth()    === thisMonth
+                ) {
+                    newThisMonth++;
+                }
+
+            }
+
+        });
+
+
+        // Todos os cadastrados são considerados ativos
+        // (não existe campo de inativação no sistema).
+
+        var elActive = document.querySelector("#activePatients");
+        var elNew    = document.querySelector("#newPatients");
+
+        if (elActive) {
+            elActive.textContent = snapshot.size;
+        }
+
+        if (elNew) {
+            elNew.textContent = newThisMonth;
+        }
+
+
+        // Atualizar também o painel de visão geral.
+
+        var quickTotal  = document.querySelector("#quickTotalPatients");
+        var quickActive = document.querySelector("#quickActivePatients");
+        var quickNew    = document.querySelector("#quickNewPatients");
+
+        if (quickTotal)  { quickTotal.textContent  = snapshot.size; }
+        if (quickActive) { quickActive.textContent = snapshot.size; }
+        if (quickNew)    { quickNew.textContent    = newThisMonth; }
+
+
     } catch (error) {
 
         console.error(
