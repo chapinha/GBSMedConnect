@@ -5,59 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GBSMedConnect</title>
+    <title> GBSMedConnect</title>
 
     <link rel="stylesheet" href="../CSS/style.css">
 
 </head>
 
 <body>
-
-<!-- ÍCONES (sprite SVG usado apenas no dashboard) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="i-calendar" viewBox="0 0 24 24">
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <path d="M16 2v4M8 2v4M3 10h18"/>
-    </symbol>
-    <symbol id="i-calendar-plus" viewBox="0 0 24 24">
-        <path d="M8 2v4M16 2v4"/>
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <path d="M3 10h18M12 14v4M10 16h4"/>
-    </symbol>
-    <symbol id="i-users" viewBox="0 0 24 24">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-    </symbol>
-    <symbol id="i-user-plus" viewBox="0 0 24 24">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M19 8v6M22 11h-6"/>
-    </symbol>
-    <symbol id="i-clipboard" viewBox="0 0 24 24">
-        <rect x="8" y="2" width="8" height="4" rx="1"/>
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-        <path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
-    </symbol>
-    <symbol id="i-clipboard-plus" viewBox="0 0 24 24">
-        <rect x="8" y="2" width="8" height="4" rx="1"/>
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-        <path d="M12 11v6M9 14h6"/>
-    </symbol>
-    <symbol id="i-check" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="m9 12 2 2 4-4"/>
-    </symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24">
-        <path d="M12 5v14M5 12h14"/>
-    </symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-    </symbol>
-    <symbol id="i-chevron" viewBox="0 0 24 24">
-        <path d="m9 18 6-6-6-6"/>
-    </symbol>
-</svg>
 
 <div class="app">
 
@@ -222,33 +176,18 @@
 
 
         <!-- DASHBOARD -->
-        <section class="dashboard dash">
+        <section class="dashboard">
 
-            <!-- BANNER DE BOAS-VINDAS -->
-            <div class="dash-hero">
+            <!-- CABEÇALHO -->
+            <div class="page-heading">
 
-                <svg
-                    class="dash-hero-pulse"
-                    viewBox="0 0 640 160"
-                    preserveAspectRatio="xMaxYMid meet"
-                    aria-hidden="true"
-                    focusable="false"
-                >
-                    <path
-                        pathLength="1"
-                        d="M0 90 H120 L140 90 L158 60 L176 118 L200 20 L228 140 L250 90 H330 L346 90 L360 72 L374 108 L392 52 L414 122 L430 90 H640"
-                    />
-                </svg>
-
-                <div class="dash-hero-text">
-
-                    <p class="dash-hero-date" id="dashboardDate"></p>
+                <div>
 
                     <h1 id="dashboardGreeting">
                         Olá!
                     </h1>
 
-                    <p class="dash-hero-summary" id="dashboardSummary">
+                    <p>
                         Aqui está um resumo da sua clínica hoje.
                     </p>
 
@@ -256,127 +195,170 @@
 
                 <button
                     id="newAppointmentButton"
-                    class="dash-btn"
+                    class="primary-button"
                     type="button"
                 >
-                    <svg class="ico" aria-hidden="true"><use href="#i-plus"></use></svg>
-                    Nova consulta
+                    + Nova consulta
                 </button>
 
             </div>
 
 
-            <!-- CARDS DE RESUMO -->
-            <div class="dash-stats">
+            <!-- CARDS -->
+            <div class="stats-grid">
 
                 <!-- CONSULTAS HOJE -->
-                <article class="dash-stat dash-tone-aqua">
+                <div class="stat-card">
 
-                    <div class="dash-stat-top">
-                        <span class="dash-stat-label">Consultas hoje</span>
+                    <div class="stat-icon aqua">
 
-                        <span class="dash-stat-icon">
-                            <svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>
-                        </span>
+                        <img
+                            src="../IMG/agenda.png"
+                            alt="Consultas"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
                     </div>
 
-                    <strong class="dash-stat-value" id="dashboardTodayCount">0</strong>
+                    <div class="stat-information">
 
-                    <span class="dash-stat-hint">Consultas agendadas para hoje</span>
+                        <span>Consultas hoje</span>
 
-                </article>
+                        <strong id="dashboardTodayCount">
+                            0
+                        </strong>
+
+                        <small>
+                            Consultas agendadas para hoje
+                        </small>
+
+                    </div>
+
+                </div>
 
 
                 <!-- TOTAL DE PACIENTES -->
-                <article class="dash-stat dash-tone-blue">
+                <div class="stat-card">
 
-                    <div class="dash-stat-top">
-                        <span class="dash-stat-label">Total de pacientes</span>
+                    <div class="stat-icon blue">
 
-                        <span class="dash-stat-icon">
-                            <svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg>
-                        </span>
+                        <img
+                            src="../IMG/pacientes.png"
+                            alt="Pacientes"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
                     </div>
 
-                    <strong class="dash-stat-value" id="dashboardPatientsCount">0</strong>
+                    <div class="stat-information">
 
-                    <span class="dash-stat-hint">Pacientes cadastrados</span>
+                        <span>Total de pacientes</span>
 
-                </article>
+                        <strong id="dashboardPatientsCount">
+                            0
+                        </strong>
+
+                        <small>
+                            Pacientes cadastrados
+                        </small>
+
+                    </div>
+
+                </div>
 
 
                 <!-- PRONTUÁRIOS -->
-                <article class="dash-stat dash-tone-purple is-pending">
+                <div class="stat-card">
 
-                    <div class="dash-stat-top">
-                        <span class="dash-stat-label">Prontuários</span>
+                    <div class="stat-icon purple">
 
-                        <span class="dash-stat-icon">
-                            <svg class="ico" aria-hidden="true"><use href="#i-clipboard"></use></svg>
-                        </span>
+                        <img
+                            src="../IMG/prancheta.png"
+                            alt="Prontuários"
+                            style="width: 34px; height: 34px; object-fit: contain; display: block;"
+                        >
+
                     </div>
 
-                    <strong class="dash-stat-value">—</strong>
+                    <div class="stat-information">
 
-                    <span class="dash-stat-hint">Registros cadastrados</span>
+                        <span>Prontuários</span>
 
-                </article>
+                        <strong>
+                            —
+                        </strong>
+
+                        <small>
+                            Registros cadastrados
+                        </small>
+
+                    </div>
+
+                </div>
 
 
                 <!-- ATENDIMENTOS -->
-                <article class="dash-stat dash-tone-orange is-pending">
+                <div class="stat-card">
 
-                    <div class="dash-stat-top">
-                        <span class="dash-stat-label">Atendimentos</span>
-
-                        <span class="dash-stat-icon">
-                            <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
-                        </span>
+                    <div class="stat-icon orange">
+                        ✓
                     </div>
 
-                    <strong class="dash-stat-value">—</strong>
+                    <div class="stat-information">
 
-                    <span class="dash-stat-hint">Dados disponíveis em breve</span>
+                        <span>Atendimentos</span>
 
-                </article>
+                        <strong>
+                            —
+                        </strong>
+
+                        <small>
+                            Dados disponíveis em breve
+                        </small>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
             <!-- ÁREA INFERIOR -->
-            <div class="dash-grid">
+            <div class="dashboard-grid">
 
                 <!-- CONSULTAS -->
-                <section class="dash-card">
+                <section class="dashboard-card appointments-card">
 
-                    <div class="dash-card-head">
+                    <div class="card-header">
 
                         <div>
+
                             <h2>Próximas consultas</h2>
-                            <p>Consultas agendadas para hoje</p>
+
+                            <p>
+                                Consultas agendadas para hoje
+                            </p>
+
                         </div>
 
-                        <a href="agenda.html" class="dash-link">
-                            Ver agenda
-                            <svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg>
+                        <a href="agenda.html">
+                            Ver agenda →
                         </a>
 
                     </div>
 
 
                     <!--
-                        O dashboard.js preenche esta área
+                        O dashboard.js irá preencher esta área
                         com as consultas reais do Firestore.
                     -->
                     <div
-                        class="dash-appts"
+                        class="appointments-list"
                         id="dashboardAppointmentsList"
-                        aria-live="polite"
                     >
 
-                        <div class="dash-skeleton" role="status">
-                            <span class="dash-sr-only">Carregando consultas...</span>
-                            <i></i><i></i><i></i>
+                        <div class="empty-state">
+                            <p>Carregando consultas...</p>
                         </div>
 
                     </div>
@@ -385,70 +367,90 @@
 
 
                 <!-- ACESSO RÁPIDO -->
-                <section class="dash-card">
+                <section class="dashboard-card quick-card">
 
-                    <div class="dash-card-head">
+                    <div class="card-header">
 
                         <div>
+
                             <h2>Acesso rápido</h2>
-                            <p>Ações frequentes</p>
+
+                            <p>
+                                Ações frequentes
+                            </p>
+
                         </div>
 
                     </div>
 
 
-                    <div class="dash-actions">
+                    <div class="quick-actions">
 
-                        <a href="pacientes.html" class="dash-action dash-tone-aqua">
+                        <a
+                            href="pacientes.html"
+                            class="quick-action"
+                        >
 
-                            <span class="dash-action-icon">
-                                <svg class="ico" aria-hidden="true"><use href="#i-user-plus"></use></svg>
-                            </span>
+                            <div class="quick-icon aqua">
+                                +
+                            </div>
 
-                            <span class="dash-action-text">
+                            <div>
                                 <strong>Novo paciente</strong>
                                 <span>Cadastrar paciente</span>
-                            </span>
+                            </div>
 
-                            <span class="dash-action-go">
-                                <svg class="ico" aria-hidden="true"><use href="#i-chevron"></use></svg>
-                            </span>
+                            <b>›</b>
 
                         </a>
 
 
-                        <a href="agenda.html" class="dash-action dash-tone-blue">
+                        <a
+                            href="agenda.html"
+                            class="quick-action"
+                        >
 
-                            <span class="dash-action-icon">
-                                <svg class="ico" aria-hidden="true"><use href="#i-calendar-plus"></use></svg>
-                            </span>
+                            <div class="quick-icon blue">
 
-                            <span class="dash-action-text">
+                                <img
+                                    src="../IMG/agenda.png"
+                                    alt="Nova consulta"
+                                    style="width: 28px; height: 28px; object-fit: contain; display: block;"
+                                >
+
+                            </div>
+
+                            <div>
                                 <strong>Nova consulta</strong>
                                 <span>Agendar atendimento</span>
-                            </span>
+                            </div>
 
-                            <span class="dash-action-go">
-                                <svg class="ico" aria-hidden="true"><use href="#i-chevron"></use></svg>
-                            </span>
+                            <b>›</b>
 
                         </a>
 
 
-                        <a href="prontuario.html" class="dash-action dash-tone-purple">
+                        <a
+                            href="prontuario.html"
+                            class="quick-action"
+                        >
 
-                            <span class="dash-action-icon">
-                                <svg class="ico" aria-hidden="true"><use href="#i-clipboard-plus"></use></svg>
-                            </span>
+                            <div class="quick-icon purple">
 
-                            <span class="dash-action-text">
+                                <img
+                                    src="../IMG/prancheta.png"
+                                    alt="Novo prontuário"
+                                    style="width: 28px; height: 28px; object-fit: contain; display: block;"
+                                >
+
+                            </div>
+
+                            <div>
                                 <strong>Novo prontuário</strong>
                                 <span>Registrar atendimento</span>
-                            </span>
+                            </div>
 
-                            <span class="dash-action-go">
-                                <svg class="ico" aria-hidden="true"><use href="#i-chevron"></use></svg>
-                            </span>
+                            <b>›</b>
 
                         </a>
 
@@ -460,7 +462,7 @@
 
 
             <!-- RODAPÉ -->
-            <div class="dash-footer">
+            <div class="dashboard-footer">
 
                 <span>
                     GBSMedConnect © 2026
