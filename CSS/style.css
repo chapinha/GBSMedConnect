@@ -3365,3 +3365,851 @@ body {
     position: relative;
     z-index: 1;
 }
+
+/* =========================================================
+   GBSMedConnect
+   DASHBOARD — visual moderno
+
+   Carregado SOMENTE em HTML/dashboard.html, depois do
+   style.css. Todas as classes usam o prefixo "dash-", então
+   nada aqui afeta as outras páginas (agenda, pacientes,
+   prontuário, perfil...).
+========================================================= */
+
+.dash {
+    /* Tokens do dashboard */
+    --dash-ink: #12302d;
+    --dash-ink-soft: #42585a;
+    --dash-ink-mute: #5b706d;
+    --dash-line: #dbe9f4;
+    --dash-line-strong: #bcd3e4;
+    --dash-soft: #f4f9fd;
+    --dash-shadow:
+        0 1px 2px rgba(12, 58, 80, 0.06),
+        0 14px 30px -16px rgba(12, 58, 80, 0.28);
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Ícones de traço (usam o sprite SVG do HTML) */
+.dash .ico {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Cores por "tom" — usadas em cards, ações e avatares */
+.dash-tone-aqua {
+    --accent: #20b8a6;
+    --accent-soft: #e5f7f3;
+    --accent-ink: #12806f;
+}
+
+.dash-tone-blue {
+    --accent: #4c9ee8;
+    --accent-soft: #eaf4fd;
+    --accent-ink: #2570b8;
+}
+
+.dash-tone-purple {
+    --accent: #8b7be8;
+    --accent-soft: #f0edff;
+    --accent-ink: #6552cc;
+}
+
+.dash-tone-orange {
+    --accent: #f2a65a;
+    --accent-soft: #fff3e6;
+    --accent-ink: #b9680f;
+}
+
+.dash-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Foco visível para teclado */
+.dash a:focus-visible,
+.dash button:focus-visible {
+    outline: 3px solid rgba(32, 184, 166, 0.6);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   BANNER DE BOAS-VINDAS
+========================================================= */
+
+.dash-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 34px 38px;
+    border-radius: 24px;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            520px 260px at 92% -12%,
+            rgba(103, 213, 199, 0.45),
+            transparent 70%
+        ),
+        linear-gradient(115deg, #0d3f3b 0%, #11635b 52%, #1a9b8c 100%);
+    box-shadow: 0 20px 40px -20px rgba(8, 52, 48, 0.6);
+}
+
+/* Linha de batimento cardíaco ao fundo */
+.dash-hero-pulse {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 64%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+}
+
+.dash-hero-pulse path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.24);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: dash-pulse-draw 2.4s 0.25s ease-out forwards;
+}
+
+@keyframes dash-pulse-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.dash-hero-text {
+    min-width: 0;
+}
+
+.dash-hero-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 8px;
+}
+
+.dash-hero-date:empty {
+    display: none;
+}
+
+.dash-hero h1 {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.dash-hero-summary {
+    margin-top: 10px;
+    max-width: 56ch;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.dash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #0f6f65;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.45);
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dash-btn:hover {
+    background: #effaf8;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.5);
+}
+
+.dash-btn:active {
+    transform: translateY(0);
+}
+
+.dash-hero .dash-btn:focus-visible {
+    outline-color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* =========================================================
+   CARDS DE RESUMO
+========================================================= */
+
+.dash-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.dash-stat {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 22px 22px;
+    background: #ffffff;
+    border: 1px solid var(--dash-line);
+    border-radius: 20px;
+    box-shadow: var(--dash-shadow);
+}
+
+/* Brilho suave na cor do card, no canto superior */
+.dash-stat::after {
+    content: "";
+    position: absolute;
+    top: -46px;
+    right: -46px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background:
+        radial-gradient(closest-side, var(--accent-soft), transparent);
+    pointer-events: none;
+}
+
+.dash-stat > * {
+    position: relative;
+    z-index: 1;
+}
+
+.dash-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.dash-stat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dash-ink-soft);
+}
+
+.dash-stat-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+}
+
+.dash-stat-icon .ico {
+    width: 22px;
+    height: 22px;
+}
+
+.dash-stat-value {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--dash-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.dash-stat-hint {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--dash-ink-mute);
+}
+
+/* Cards cujos dados ainda não existem */
+.dash-stat.is-pending .dash-stat-value {
+    color: #9db0ad;
+}
+
+
+/* =========================================================
+   GRID INFERIOR + CARDS
+========================================================= */
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.dash-card {
+    background: #ffffff;
+    border: 1px solid var(--dash-line);
+    border-radius: 20px;
+    box-shadow: var(--dash-shadow);
+    overflow: hidden;
+}
+
+.dash-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px 8px;
+}
+
+.dash-card-head h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dash-ink);
+    margin-bottom: 3px;
+}
+
+.dash-card-head p {
+    font-size: 13px;
+    color: var(--dash-ink-mute);
+}
+
+.dash-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #e5f7f3;
+    color: #0f7a6e;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.dash-link:hover {
+    background: #d2f0ea;
+}
+
+.dash-link .ico {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================================
+   AGENDA DO DIA (linha do tempo)
+========================================================= */
+
+.dash-appts {
+    padding: 16px 24px 24px;
+}
+
+.dash-appt {
+    display: grid;
+    grid-template-columns: 56px 16px minmax(0, 1fr);
+    column-gap: 12px;
+    padding-bottom: 10px;
+}
+
+.dash-appt:last-child {
+    padding-bottom: 0;
+}
+
+.dash-appt-time {
+    padding-top: 15px;
+    text-align: right;
+}
+
+.dash-appt-time strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dash-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.dash-appt-flag {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f7a6e;
+}
+
+/* Trilho vertical com ponto */
+.dash-appt-rail {
+    position: relative;
+}
+
+.dash-appt-rail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: -10px; /* cobre o espaço entre as consultas */
+    left: 50%;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--dash-line-strong);
+}
+
+.dash-appt:first-child .dash-appt-rail::before {
+    top: 24px;
+}
+
+.dash-appt:last-child .dash-appt-rail::before {
+    bottom: auto;
+    height: 24px;
+}
+
+.dash-appt:only-child .dash-appt-rail::before {
+    display: none;
+}
+
+.dash-appt-rail::after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #8fb0c8;
+}
+
+.dash-appt-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    min-width: 0;
+    padding: 12px 14px;
+    background: var(--dash-soft);
+    border: 1px solid transparent;
+    border-radius: 16px;
+}
+
+.dash-appt-avatar {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.dash-appt-info {
+    flex: 1 1 140px;
+    min-width: 0;
+}
+
+.dash-appt-info strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dash-ink);
+    overflow-wrap: anywhere;
+}
+
+.dash-appt-info span {
+    display: block;
+    margin-top: 1px;
+    font-size: 13px;
+    color: var(--dash-ink-mute);
+}
+
+/* Próxima consulta */
+.dash-appt.is-next .dash-appt-card {
+    background: #effaf8;
+    border-color: #9fdcd3;
+}
+
+.dash-appt.is-next .dash-appt-rail::after {
+    background: #20b8a6;
+    border-color: #20b8a6;
+    box-shadow: 0 0 0 4px rgba(32, 184, 166, 0.22);
+}
+
+/* Consultas cujo horário já passou */
+.dash-appt.is-past .dash-appt-time strong {
+    color: var(--dash-ink-mute);
+}
+
+.dash-appt.is-past .dash-appt-info strong {
+    color: var(--dash-ink-soft);
+}
+
+.dash-appt.is-past .dash-appt-rail::after {
+    background: #c5d6e3;
+    border-color: #c5d6e3;
+}
+
+/* Badges de status */
+.dash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: #eef2f5;
+    color: #4a5b66;
+}
+
+.dash-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.dash-badge--pending {
+    background: #fff3e6;
+    color: #a45c0b;
+}
+
+.dash-badge--confirmed {
+    background: #e5f7f3;
+    color: #0f7a6e;
+}
+
+.dash-badge--done {
+    background: #eaf4fd;
+    color: #1f68ac;
+}
+
+.dash-badge--canceled {
+    background: #fdecec;
+    color: #b02a2a;
+}
+
+
+/* =========================================================
+   ESTADOS: VAZIO, ERRO E CARREGANDO
+========================================================= */
+
+.dash-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 28px 16px 12px;
+    text-align: center;
+}
+
+.dash-empty-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 6px;
+    border-radius: 18px;
+    background: #e5f7f3;
+    color: #12806f;
+}
+
+.dash-empty-icon .ico {
+    width: 26px;
+    height: 26px;
+}
+
+.dash-empty strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dash-ink);
+}
+
+.dash-empty p {
+    max-width: 38ch;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--dash-ink-mute);
+}
+
+.dash-empty .dash-link {
+    margin-top: 10px;
+}
+
+.dash-empty.is-error .dash-empty-icon {
+    background: #fdecec;
+    color: #b02a2a;
+}
+
+.dash-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dash-skeleton i {
+    display: block;
+    height: 64px;
+    border-radius: 16px;
+    background: #eaf3fa;
+    animation: dash-skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.dash-skeleton i:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.dash-skeleton i:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes dash-skeleton-pulse {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+
+/* =========================================================
+   ACESSO RÁPIDO
+========================================================= */
+
+.dash-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 20px 22px;
+}
+
+.dash-action {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid var(--dash-line);
+    border-radius: 16px;
+    color: inherit;
+    text-decoration: none;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.dash-action:hover {
+    background: var(--dash-soft);
+    border-color: var(--accent);
+}
+
+.dash-action-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+}
+
+.dash-action-icon .ico {
+    width: 22px;
+    height: 22px;
+}
+
+.dash-action-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.dash-action-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dash-ink);
+}
+
+.dash-action-text span {
+    display: block;
+    margin-top: 1px;
+    font-size: 13px;
+    color: var(--dash-ink-mute);
+}
+
+.dash-action-go {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--dash-soft);
+    color: var(--dash-ink-mute);
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.dash-action-go .ico {
+    width: 16px;
+    height: 16px;
+}
+
+.dash-action:hover .dash-action-go {
+    transform: translateX(2px);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.dash-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 4px 6px 0;
+    font-size: 12px;
+    color: #2f5673;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+    .dash-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .dash-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 26px 24px;
+    }
+
+    .dash-hero-pulse {
+        width: 100%;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 600px) {
+    .dash {
+        gap: 18px;
+    }
+
+    .dash-appts {
+        padding: 12px 16px 20px;
+    }
+
+    .dash-card-head {
+        padding: 18px 16px 6px;
+    }
+
+    .dash-appt {
+        grid-template-columns: 46px 12px minmax(0, 1fr);
+        column-gap: 8px;
+    }
+
+    .dash-appt-time strong {
+        font-size: 14px;
+    }
+
+    .dash-appt-card {
+        gap: 8px 10px;
+        padding: 10px 12px;
+    }
+
+    .dash-appt-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .dash-appt-info {
+        flex-basis: 90px;
+    }
+
+    .dash-badge {
+        margin-left: 0;
+    }
+
+    .dash-actions {
+        padding: 12px 14px 18px;
+    }
+
+    .dash-footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 520px) {
+    .dash-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-card-head {
+        flex-wrap: wrap;
+    }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .dash-hero-pulse path {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+
+    .dash-skeleton i {
+        animation: none;
+    }
+
+    .dash-btn,
+    .dash-action-go {
+        transition: none;
+    }
+}
