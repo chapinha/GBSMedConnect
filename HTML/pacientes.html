@@ -1538,86 +1538,136 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <!-- ===================================================== -->
-<!-- SINCRONIZAR PAINEL DE VISÃO GERAL -->
+<!-- ESTATÍSTICAS DO PAINEL DE VISÃO GERAL -->
 <!-- ===================================================== -->
 
-<script>
+<script type="module">
 
-(function () {
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-    /*
-     * Espelha os valores dos cards de estatísticas
-     * já preenchidos pelo app.js para o painel
-     * de visão geral abaixo da lista.
-     */
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-    function syncQuickStats() {
+import { app } from "../js/firebase.js";
 
-        var pairs = [
-            ["totalPatients",   "quickTotalPatients"],
-            ["activePatients",  "quickActivePatients"],
-            ["newPatients",     "quickNewPatients"],
-            ["todayAppointments", "quickTodayAppointments"]
-        ];
 
-        pairs.forEach(function (pair) {
+const auth = getAuth(app);
+const db   = getFirestore(app);
 
-            var source = document.getElementById(pair[0]);
-            var target = document.getElementById(pair[1]);
 
-            if (source && target) {
-                target.textContent = source.textContent.trim() || "—";
+onAuthStateChanged(auth, async function (user) {
+
+    if (!user) {
+        return;
+    }
+
+    try {
+
+        const patientsQuery = query(
+            collection(db, "patients"),
+            where("doctorId", "==", user.uid)
+        );
+
+        const snapshot = await getDocs(patientsQuery);
+
+
+        /*
+         * Total de pacientes = todos os documentos.
+         * Ativos = todos (não há campo "status" de inativação no sistema).
+         */
+
+        var total  = snapshot.size;
+        var active = snapshot.size;
+        var newThisMonth = 0;
+
+
+        /*
+         * Novos este mês: pacientes cujo createdAt
+         * está dentro do mês e ano correntes.
+         */
+
+        var now       = new Date();
+        var thisYear  = now.getFullYear();
+        var thisMonth = now.getMonth();
+
+
+        snapshot.forEach(function (docSnap) {
+
+            var data = docSnap.data();
+
+            if (data.createdAt && data.createdAt.toDate) {
+
+                var created = data.createdAt.toDate();
+
+                if (
+                    created.getFullYear() === thisYear &&
+                    created.getMonth()    === thisMonth
+                ) {
+                    newThisMonth++;
+                }
+
             }
 
         });
 
+
+        /*
+         * Preencher os cards de estatísticas do topo da página.
+         */
+
+        var elTotal  = document.getElementById("totalPatients");
+        var elActive = document.getElementById("activePatients");
+        var elNew    = document.getElementById("newPatients");
+
+        if (elTotal)  { elTotal.textContent  = total; }
+        if (elActive) { elActive.textContent = active; }
+        if (elNew)    { elNew.textContent    = newThisMonth; }
+
+
+        /*
+         * Preencher o painel de visão geral diretamente
+         * (sem depender de MutationObserver).
+         */
+
+        var quickTotal  = document.getElementById("quickTotalPatients");
+        var quickActive = document.getElementById("quickActivePatients");
+        var quickNew    = document.getElementById("quickNewPatients");
+
+        if (quickTotal)  { quickTotal.textContent  = total; }
+        if (quickActive) { quickActive.textContent = active; }
+        if (quickNew)    { quickNew.textContent    = newThisMonth; }
+
+
+        /*
+         * Atualiza também o pequeno texto complementar
+         * do card "Total de pacientes" no topo.
+         */
+
+        var elSmall = document.querySelector("#totalPatients ~ small") ||
+                      document.querySelector(".stat-information small.positive");
+
+        if (elSmall && total > 0) {
+            elSmall.textContent = total === 1
+                ? "1 paciente cadastrado"
+                : total + " pacientes cadastrados";
+        }
+
+
+    } catch (error) {
+
+        console.error("Erro ao calcular estatísticas de pacientes:", error);
+
     }
 
-
-    /*
-     * Observa mutações nos cards de estatísticas
-     * para manter o painel atualizado em tempo real.
-     */
-
-    function startObserving() {
-
-        var sourceIds = [
-            "totalPatients",
-            "activePatients",
-            "newPatients",
-            "todayAppointments"
-        ];
-
-        var observer = new MutationObserver(function () {
-            syncQuickStats();
-        });
-
-        sourceIds.forEach(function (id) {
-
-            var el = document.getElementById(id);
-
-            if (el) {
-                observer.observe(el, {
-                    childList: true,
-                    characterData: true,
-                    subtree: true
-                });
-            }
-
-        });
-
-        syncQuickStats();
-
-    }
-
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", startObserving);
-    } else {
-        startObserving();
-    }
-
-})();
+});
 
 </script>
 
